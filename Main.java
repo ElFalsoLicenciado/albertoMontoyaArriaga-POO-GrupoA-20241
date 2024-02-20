@@ -22,6 +22,11 @@ public class Main {
         libro4.title = "Five Nights at Freddy's Los ojos de plata"; libro4.author = "Scott Cawthon"; libro4.publish = 2016;
         System.out.println("El libro es: "+libro4.title+", escrito por: "+libro4.author+" y publicado en: "+libro4.publish);
         
-        
+        System.out.println("");
+
+        Rectangulo rect1 = new Rectangulo(2,6);
+        Rectangulo rect2 = new Rectangulo(9,4);
+        Rectangulo rect3 = new Rectangulo(8,9);
+        Rectangulo rect4 = new Rectangulo(5,7);
     }
 }
