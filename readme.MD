@@ -25,5 +25,5 @@ Realizar una clase llamada ***CalculadoraImpuestos*** que cuente con un método 
 
 - Si el usuario manda *dividendos*, *porcentajeImpuesto* y *exención*.
   - Calcular los *impuestos* = *dividendos* * (*porcentajeImpuesto* / 100).
-     - Si los *impuestos* son mayores que la *exención* retornar los *impuestos* menos la *exención*, sino retornar 0.
+  - Si los *impuestos* son mayores que la *exención* retornar los *impuestos* menos la *exención*, sino retornar 0.
     
