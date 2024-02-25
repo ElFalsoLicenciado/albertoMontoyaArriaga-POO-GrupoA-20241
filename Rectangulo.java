@@ -1,29 +1,30 @@
 public class Rectangulo {
     
-    float length;
-    float heigth;
 
+    public Rectangulo(int length, int heigth){
+        System.out.printf("Has creado un rectángulo de base: %s  y altura %s%n",length, heigth);
+        AreaPerimeter(length, heigth);
 
-    public Rectangulo(float length, float heigth){
-        this.length = length;
-        this.heigth = heigth;
-        Size();
-        Area();
-        Perimeter();
     }
 
-    public void Size(){
-        System.out.println("Rectángulo de base: "+length+" y altura de "+heigth);
+    public Rectangulo(double length, double heigth){
+        System.out.printf("Has creado un rectángulo de base: %s  y altura %s%n",length, heigth);
+        AreaPerimeter(length, heigth);
+    
     }
 
-
-    public void Area(){
-        System.out.print("La area es: ");
-        System.out.print(length*heigth);     
+    public void AreaPerimeter(int length, int heigth){
+        int area = length*heigth;
+        int perimeter = (length*2)+(heigth*2);
+        System.out.printf("El perímetro es: %s y el área es: %s%n",perimeter,area);
+        System.out.println();
     }
-    public void Perimeter(){
-        System.out.print("\t El perímetro es: ");
-        System.out.print(length+length+heigth+heigth+"\n");
+    
+    public void AreaPerimeter(double length, double heigth){
+        double area = length*heigth;
+        double perimeter = (length*2)+(heigth*2);
+        System.out.printf("El perímetro es: %s y el área es: %s%n",perimeter,area);
+        System.out.println();
     }
 
 }

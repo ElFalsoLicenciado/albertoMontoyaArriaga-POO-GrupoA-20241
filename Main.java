@@ -4,8 +4,8 @@ public class Main {
         
       
         Rectangulo rect1 = new Rectangulo(2,6);
-        Rectangulo rect2 = new Rectangulo(9,4);
-        Rectangulo rect3 = new Rectangulo(8,9);
-        Rectangulo rect4 = new Rectangulo(5,7);
+        Rectangulo rect2 = new Rectangulo(9.1,4.2);
+        Rectangulo rect3 = new Rectangulo(7,3);
+        Rectangulo rect4 = new Rectangulo(8.33,5.97);    
     }
 }
