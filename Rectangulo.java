@@ -2,7 +2,7 @@ public class Rectangulo {
     
 
     public Rectangulo(int length, int heigth){
-        System.out.printf("Has creado un rectángulo de base: %s  y altura %s%n",length, heigth);
+        System.out.printf("You've created a rectangle with a length of: %s  and height of: %s%n",length, heigth);
         AreaPerimeter(length, heigth);
 
     }
@@ -22,8 +22,10 @@ public class Rectangulo {
     
     public void AreaPerimeter(double length, double heigth){
         double area = length*heigth;
+        area = Math.round(area*100.0)/100.0;
         double perimeter = (length*2)+(heigth*2);
-        System.out.printf("\"The perimeter is equal to: %s and the area is equal to: %s%n",perimeter,area);
+        perimeter = Math.round(perimeter*100.0)/100.0;
+        System.out.printf("The perimeter is equal to: %s and the area is equal to: %s%n",perimeter,area);
         System.out.println();
     }
 
