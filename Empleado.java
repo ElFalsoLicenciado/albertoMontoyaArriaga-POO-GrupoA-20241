@@ -30,12 +30,14 @@ public class Empleado {
 
      public void calculateWage(double baseSalary, double bonus){
         double wage = baseSalary+bonus;
+        wage = Math.round(wage * 100.0) / 100.0;
         System.out.printf("You have a wage of: $%s%n",wage);
         System.out.println();
      }
 
      public void calculateWage(double baseSalary, double bonus, int extraH){
       double wage = baseSalary+bonus+(extraH*20);
+      wage = Math.round(wage * 100.0) / 100.0;
       System.out.printf("You have a wage of: $%s%n",wage);
       System.out.println();  
      }
