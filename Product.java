@@ -4,15 +4,16 @@ public class Product {
     private int stock;
     
     public Product(String name, double price){
-        if(name!=null){
+        if(name.length()>=1){
             this.name = name;
-            System.out.println(getName());
+            System.out.println("Product name: "+getName());
         } else {
             System.out.println("Name is empty");
+            this.name="Unknown";
         }
         if(price>0){
             this.price = price;
-            System.out.println(getPrice());
+            System.out.println("Current price: $"+getPrice());
         } else {
             System.out.println("Negative value");
         }
@@ -22,21 +23,22 @@ public class Product {
     }
     
     public Product(String name, double price, int stock){
-       if(name!=null){
+       if(name.length()>=1){
             this.name = name;
-            System.out.println(getName());
+            System.out.println("Product name: "+getName());
         } else {
             System.out.println("Name is empty");
+            this.name="Unknown";
         }
         if(price>0){
             this.price = price;
-            System.out.println(getPrice());
+            System.out.println("Current price: $"+getPrice());
         } else {
             System.out.println("Negative value");
         }
         if(stock>0){
             this.stock = stock;
-            System.out.println(getStock());
+            System.out.println("Product stock: "+getStock());
         } else{
             System.out.println("Negative value");
         }
@@ -48,9 +50,9 @@ public class Product {
     }
     
     public void setName(String name){
-        if(name!=null){
+        if(name.length()>=1){
             this.name = name;
-            System.out.println("New"+name);
+            System.out.println("New name: "+name);
         } else {
             System.out.println("Name is empty");
         }
@@ -63,7 +65,7 @@ public class Product {
     public void setPrice(double price){
         if(price>0){
             this.price = price;
-            System.out.println("New"+price);
+            System.out.println("New price: $"+price);
         } else {
             System.out.println("Negative value");
         }
@@ -76,7 +78,7 @@ public class Product {
     public void setStock(int stock){
         if(stock>0){
             this.stock = stock;
-            System.out.println("New"+stock);
+            System.out.println("New stock: "+stock);
         } else{
             System.out.println("Negative value");
         }
@@ -85,16 +87,16 @@ public class Product {
     public void increaseStock(int q){
         if(q>0){
             stock = stock+q;
-            System.out.println(getStock());
+            System.out.println("New stock: "+getStock());
         }else{
             System.out.println("Negative value");
         }
     }
     
     public void decreaseStock(int q){
-        if(q>0&&q>=stock){
+        if(q>0&&q<=stock){
             stock = stock-q;
-            System.out.println(getStock());
+            System.out.println("New stock: "+getStock());
         }else if (q<0){
             System.out.println("Negative value");
         }else if (q>stock){
