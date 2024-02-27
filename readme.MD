@@ -1,29 +1,24 @@
-# Tarea #4 Unidad 2
-## Ejercicio 1:
-Crear una clase llamada ***Rectangulo*** la cual pueda calcular el **área** y el **perímetro**. Debes de considerar que el usuario puede ingresarte ```enteros``` o ```doubles```, por lo que debes utilizar la ```sobrecarga de métodos``` para que existan funciones con el mismo nombre pero realicen una función diferente.
+# Tarea #6 Unidad 2
+Se desea crear una clase llamada ```Producto``` que represente un artículo en un inventario. La clase debe tener los siguientes atributos privados:
 
-## Ejercicio 2:
-Crear una clase ***Empleado*** y crear métodos llamados **calcularSalario** para poder calcular el *salario de la persona*.
-- El / Los métodos pueden recibir hasta 3 parámetros: *sueldoBase*, *bonificación* y *horas extras*.
+  1. ```nombre```: Una cadena que representa el nombre del producto
+  2. ```precio```: Un número de punto flotante que representa el precio del producto.
+  3. ```stock```: Un número entero que representa la cantidad de existencias disponibles del producto.
 
-- Si el usuario manda por parámetro solo el *sueldo*, retornar solo eso.
+# Se deben proporcionar los siguientes métodos públicos:
 
-- Si el usuario manda por parámetro *sueldo* y *bonificación*, retornar *sueldo* + *bonificación*.
+## 1. Constructores:
 
-- Si el usuario manda por parámetro *sueldo*, *bonificación* y *horas extras*, retornar *sueldo* + *bonificación* + (horas * 20)
-
-- Todos los métodos deben de llamarse igual por lo que tienes que usar la ```sobrecarga de métodos```.
-
-## Ejercicio 3:
-Realizar una clase llamada ***CalculadoraImpuestos*** que cuente con un método llamado **calcularImpuestos**.
-
-- Este método puede recibir hasta 4 parámetros, *ingresos* (```int```), *porcentajeImpuesto*s (```double```), *dividendos* (```double```) y *exención* (```double```).
-
-- Si el usuario manda solo los *ingresos*, retornar *ingresos* + 0.15
-
-- Si el usuario manda *ventas* y *porcentajeImpuesto* retornar *ventas* * (*porcentajeImpuesto* / 100).
-
-- Si el usuario manda *dividendos*, *porcentajeImpuesto* y *exención*.
-  - Calcular los *impuestos* = *dividendos* * (*porcentajeImpuesto* / 100).
-  - Si los *impuestos* son mayores que la *exención* retornar los *impuestos* menos la *exención*, sino retornar 0.
-    
+  - Un constructor que tome tres parámetros (```nombre```, ```precio``` y ```stock```) para inicializar todos los atributos del producto.
+  - Un constructor que tome dos parámetros (```nombre``` y ```precio```) y establezca el _stock_ en 0 por defecto.
+## 2. Getters y setter para todos los atributos:
+  - ```getNombre()``` y ```setNombre(String nombre)```.
+  - ```getPrecio()``` y ```setPrecio(double precio)```.
+  - ```getStock()``` y ```setStock(int stock)```.
+## 3. Métodos adicionales:
+  - ```aumentarStock(int cantidad)```: Aumenta el _stock_ del producto en la cantidad especificada, con validación para asegurarse de que la cantidad sea mayor que reo.
+  - ```reducirStock(int cantidad)```: Reduce el _stock_ del producto en la cantidad especificada, con validadción para asegurarse que la cantidad sea mayor que 0 y menor o gigual al _stock_ actual. 
+## Además, se deben incluir las siguientes validaciones en los setters:
+- El _precio_ y el _stock_ no pueden ser negativos.
+- El _nombre_ no puede ser nulo.
+- La cantidad a reducir del _stock_ debe ser menor o igual al _stock_ actual.
