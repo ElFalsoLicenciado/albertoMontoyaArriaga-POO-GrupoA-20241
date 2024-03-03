@@ -30,7 +30,7 @@ public class BankAccount {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    private void setAmount(double amount) {
         if(getAccountType()=='A'){
             if (amount<=50000.00 || amount>=1.00) {
                 this.amount = amount;        
