@@ -2,6 +2,7 @@ public class Employee {
     private String name;
     private String lastName;
     private BankAccount account;
+    private boolean bankAccount=false;
 
     public Employee(String name, String lastName) {
         this.name = name;
@@ -11,6 +12,7 @@ public class Employee {
     public Employee(String name, String lastName, long accountNumber, char accType) {
         this.name = name;
         this.lastName = lastName;
+        if (accType==ignoreCaseIf)
         this.account = new BankAccount(accountNumber, accType);
     }
 

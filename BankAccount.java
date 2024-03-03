@@ -6,6 +6,7 @@ public class BankAccount {
     public BankAccount(long accountNumber,char accType) {
         this.accountNumber = accountNumber;
         this.accType = accType;
+        
     }
 
     public long getAccountNumber() {
