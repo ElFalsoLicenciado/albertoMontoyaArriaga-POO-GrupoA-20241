@@ -18,11 +18,11 @@ public class Employee {
         this.status = status;
     }
 
-    public Employee(String name, String lastName, long accountNumber, char accType, double amount  ,boolean status) {
+    public Employee(String name, String lastName, long accountNumber, char accType, double amount, String con  ,boolean status) {
         this.name = name;
         this.lastName = lastName;
         System.out.printf("Registred employee: %s %s %n", this.name,this.lastName);
-        this.account = new BankAccount(accountNumber, accType, amount);
+        this.account = new BankAccount(accountNumber, accType, amount, con);
         this.status = status;
     }
 
@@ -56,6 +56,14 @@ public class Employee {
         else{
             return seeAcc;
         }
+    }
+
+    public void addFounds(double amount, String c){
+        account.setAmount(amount, c);
+    }
+
+    public void takeFounds(double amount, String c){
+        account.takeAmount(amount, c);
     }
 
     private boolean getStatus(){

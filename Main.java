@@ -45,12 +45,36 @@ public class Main {
             long accn = sc.nextLong();
             System.out.println("A type: $50,000 max, B type: $100,000 and C type: unlimited.");
             char acct = sc.next().charAt(0);
+            
             if ((acct=='A'|| acct=='B'|| acct=='C')&&(accn>=1)){
                 System.out.println("Type the amount of money you want");
                 double am = sc.nextDouble(); 
-                Employee em1 = new Employee(na, ln,accn, acct,am,true);
-                System.out.println(em1.getAccount());
                 
+                System.out.println("Are you sure?");
+                String con = sc2.nextLine();
+                
+                Employee em1 = new Employee(na, ln,accn, acct, am, con,true);
+                
+                System.out.println("Type the amount of money you want");
+                am = sc.nextDouble(); 
+                System.out.println("Are you sure?");
+                con = sc2.nextLine();
+                
+                em1.addFounds(am, con);
+                
+                System.out.println("Type the amount of money you need");
+                am = sc.nextDouble(); 
+                System.out.println("Are you sure?");
+                con = sc2.nextLine();
+
+                em1.takeFounds(am, con);
+
+                System.out.println("Type the amount of money you need");
+                am = sc.nextDouble(); 
+                System.out.println("Are you sure?");
+                con = sc2.nextLine();
+
+                em1.takeFounds(am, con);
                 }else {
                     System.out.println("Invalid input, please try again");
                 }    
