@@ -6,11 +6,16 @@ public class BankAccount {
     public BankAccount(long accountNumber,char accType) {
         this.accountNumber = accountNumber;
         this.accType = accType;
-        
+        System.out.printf("Account number: %s & account type: %s %n" ,getAccountNumber(), getAccountType());
+
     }
 
     public long getAccountNumber() {
         return accountNumber;
+    }
+
+    public char getAccountType(){
+        return accType;
     }
 
     public double getAmount() {

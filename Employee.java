@@ -2,18 +2,18 @@ public class Employee {
     private String name;
     private String lastName;
     private BankAccount account;
-    private boolean bankAccount=false;
+    private boolean status=false;
 
     public Employee(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
     }
 
-    public Employee(String name, String lastName, long accountNumber, char accType) {
+    public Employee(String name, String lastName, long accountNumber, char accType, boolean status) {
         this.name = name;
         this.lastName = lastName;
-        if (accType==ignoreCaseIf)
         this.account = new BankAccount(accountNumber, accType);
+        this.status = status;
     }
 
     public String getName() {
