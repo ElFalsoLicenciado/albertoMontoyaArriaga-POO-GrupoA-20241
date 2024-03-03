@@ -1,29 +1,18 @@
 # Tarea #4 Unidad 2
-## Ejercicio 1:
-Crear una clase llamada ***Rectangulo*** la cual pueda calcular el **área** y el **perímetro**. Debes de considerar que el usuario puede ingresarte ```enteros``` o ```doubles```, por lo que debes utilizar la ```sobrecarga de métodos``` para que existan funciones con el mismo nombre pero realicen una función diferente.
 
-## Ejercicio 2:
-Crear una clase ***Empleado*** y crear métodos llamados **calcularSalario** para poder calcular el *salario de la persona*.
-- El / Los métodos pueden recibir hasta 3 parámetros: *sueldoBase*, *bonificación* y *horas extras*.
+## Realizar métodos para poder agregar o retirar dinero de la cuenta bancaria. Considerar lo siguiente:
 
-- Si el usuario manda por parámetro solo el *sueldo*, retornar solo eso.
+1. La cuenta bancaria debe de ser alguno de estos tipos: A, B o C y debe de incluirse al momento de de registrar un usuario con una cuenta. Si se ingresa un valor diferentes a esos 3 advertirle al usuario y no permitir darlo de alta.
 
-- Si el usuario manda por parámetro *sueldo* y *bonificación*, retornar *sueldo* + *bonificación*.
+    - Si el número de cuenta es de tipo A la cuenta puede tener hasta $50,000
+    - Si el número de cuenta es de tipo B la cuenta puede tener hasta $100,000
+    - Si el número de cuenta es de tipo C la cuenta puede tener saldo ilimitado
 
-- Si el usuario manda por parámetro *sueldo*, *bonificación* y *horas extras*, retornar *sueldo* + *bonificación* + (horas * 20)
+    - Al momento de retirar dinero de la cuenta el saldo mínimo para la cuenta de tipo de tipo A es de $1,000
+    - Al momento de retirar dinero de la cuenta el saldo mínimo para la cuenta de tipo de tipo B es de $5,000
+   - Al momento de retirar dinero de la cuenta el saldo mínimo para la cuenta de tipo de tipo C es de $10,000
 
-- Todos los métodos deben de llamarse igual por lo que tienes que usar la ```sobrecarga de métodos```.
+2. Crear un método para poder ver la cuenta de algún empleado (SI ES QUE CUENTA CON ELLA) con el siguiente formato:
+    - "El número de cuenta del empleado Pedro es 12345, su saldo es 10000 y la cuenta es de tipo A" (los datos son variables)
 
-## Ejercicio 3:
-Realizar una clase llamada ***CalculadoraImpuestos*** que cuente con un método llamado **calcularImpuestos**.
-
-- Este método puede recibir hasta 4 parámetros, *ingresos* (```int```), *porcentajeImpuesto*s (```double```), *dividendos* (```double```) y *exención* (```double```).
-
-- Si el usuario manda solo los *ingresos*, retornar *ingresos* + 0.15
-
-- Si el usuario manda *ventas* y *porcentajeImpuesto* retornar *ventas* * (*porcentajeImpuesto* / 100).
-
-- Si el usuario manda *dividendos*, *porcentajeImpuesto* y *exención*.
-  - Calcular los *impuestos* = *dividendos* * (*porcentajeImpuesto* / 100).
-  - Si los *impuestos* son mayores que la *exención* retornar los *impuestos* menos la *exención*, sino retornar 0.
-    
+3. Realizar todas las validaciones correspondientes y advertirle al usaurio antes de hacer cualquier modificación que debes utilizar la ```sobrecarga de métodos``` para que existan funciones con el mismo nombre pero realicen una función diferente.
