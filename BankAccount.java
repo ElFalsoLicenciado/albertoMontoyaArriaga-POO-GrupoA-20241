@@ -13,7 +13,7 @@ public class BankAccount {
     public BankAccount(long accountNumber,char accType, double amount, String con) {
         this.accountNumber = accountNumber;
         this.accType = accType;
-        setAmount(amount, con);
+        addAmount(amount, con);
         System.out.printf("New accout: account number: %s, account type: %s & current money: $%s %n" ,getAccountNumber(), getAccountType(),getAmount());
         
     }
@@ -31,11 +31,12 @@ public class BankAccount {
     }
     
 
-    public void setAmount(double amount, String c) {
+    public void addAmount(double amount, String c) {
         if(getAccountType()=='A'){
             if ((amount>=0.00)&&((this.amount+amount)<=50000.00)) {
                 if(Confirmation(c)==true) {
                     this.amount =this.amount+amount;
+                    System.out.printf("You added $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());
 
                 }else{
@@ -57,10 +58,11 @@ public class BankAccount {
             if ((amount>=0.00)&&((this.amount+amount)<=100000.00)) {
                 if(Confirmation(c)==true) {
                     this.amount =this.amount+amount;
+                    System.out.printf("You added $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());
 
                 }else{
-                    System.out.println("Invalid input");
+                    System.out.println("Cancelled");
                 }
 
             } else if ((amount>=0.00)&&((this.amount+amount)>100000.00)){
@@ -79,10 +81,12 @@ public class BankAccount {
             if (amount>=0.00) {
                 if(Confirmation(c)==true) {
                     this.amount =this.amount+amount;
+                    System.out.printf("You added $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());       
-            }else{
-                System.out.println("Transaction cancelled.");
-            }        
+                }else{
+                System.out.println("Cancelled.");
+                }
+
             }else{
                 System.out.println("Not possible");
             }    
@@ -94,7 +98,8 @@ public class BankAccount {
         if(getAccountType()=='A'){
             if ((amount>=0.00)&&((this.amount-amount)>=1000.00)) {
                 if(Confirmation(c)==true) {
-                    this.amount =this.amount-amount;
+                    this.amount = this.amount-amount;
+                    System.out.printf("You took $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());
 
                 }else{
@@ -117,6 +122,7 @@ public class BankAccount {
             if ((amount>=0.00)&&((this.amount-amount)>=5000.00)) {
                 if(Confirmation(c)==true) {
                     this.amount =this.amount-amount;
+                    System.out.printf("You took $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());
 
                 }else{
@@ -139,6 +145,7 @@ public class BankAccount {
             if ((amount>=0.00)&&((this.amount-amount)>=10000.00)) {
                 if(Confirmation(c)==true) {
                     this.amount =this.amount-amount;
+                    System.out.printf("You took $%s %n",amount);
                     System.out.printf("You have $%s in your account.%n",getAmount());
                
                 }else{

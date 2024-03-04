@@ -13,18 +13,16 @@ public class Employee {
     public Employee(String name, String lastName, long accountNumber, char accType, boolean status) {
         this.name = name;
         this.lastName = lastName;
-        System.out.printf("Registred employee: %s %s %n", this.name,this.lastName);
+        if((accType=='A' || accType=='B' || accType=='C') && accountNumber>=1){
+            System.out.printf("Registred employee: %s %s %n", this.name,this.lastName);
         this.account = new BankAccount(accountNumber, accType);
         this.status = status;
+        } else{
+            System.out.println("Invalid account");
+        }
     }
 
-    public Employee(String name, String lastName, long accountNumber, char accType, double amount, String con  ,boolean status) {
-        this.name = name;
-        this.lastName = lastName;
-        System.out.printf("Registred employee: %s %s %n", this.name,this.lastName);
-        this.account = new BankAccount(accountNumber, accType, amount, con);
-        this.status = status;
-    }
+    
 
     public String getName() {
         return name;
@@ -59,11 +57,20 @@ public class Employee {
     }
 
     public void addFounds(double amount, String c){
-        account.setAmount(amount, c);
+        if (getStatus()==true) {
+            account.addAmount(amount, c);    
+        }else{
+            System.out.println("There's no account registred.");
+        }
+        
     }
 
     public void takeFounds(double amount, String c){
-        account.takeAmount(amount, c);
+        if (getStatus()==true) {
+            account.takeAmount(amount, c);    
+        }else{
+            System.out.println("There's no account registred.");
+        }
     }
 
     private boolean getStatus(){

@@ -10,6 +10,7 @@ public class Main {
         int o = sc.nextInt();
 
         if (o==1) {
+
             System.out.println("Write your name.");
             String na = sc2.nextLine();
             System.out.println("Write your lastname");
@@ -27,57 +28,46 @@ public class Main {
             System.out.println("A type: $50,000 max, B type: $100,000 and C type: unlimited.");
             char acct = sc.next().charAt(0);
 
-                if ((acct=='A'|| acct=='B'|| acct=='C')&&(accn>=1)){
-                    Employee em1 = new Employee(na, ln,accn, acct,true);
-                    System.out.println(em1.getAccount());
-                    
+            Employee em1 = new Employee(na, ln,accn, acct,true);
+            System.out.println(em1.getAccount());
                 
-                }else {
-                    System.out.println("Invalid input, please try again");
-                }    
-        }else if (o==3){
-            System.out.println("Write your name.");
+
+        } else if (o==3){
+            System.out.printf("Write your name: ");
             String na = sc2.nextLine();
-            System.out.println("Write your lastname");
+            System.out.printf("%nWrite your lastname: ");
             String ln = sc2.nextLine();
             
-            System.out.println("Write your account number and account type for the bank.");
+            System.out.printf("%nWrite your account number:");
             long accn = sc.nextLong();
-            System.out.println("A type: $50,000 max, B type: $100,000 and C type: unlimited.");
+            System.out.printf("%nAccount type: %nA type: $50,000 max, B type: $100,000 and C type: unlimited. ");
             char acct = sc.next().charAt(0);
-            
-            if ((acct=='A'|| acct=='B'|| acct=='C')&&(accn>=1)){
-                System.out.println("Type the amount of money you want");
+
+                Employee em1 = new Employee(na, ln,accn, acct,true);
+
+                /*     System.out.println("Type the amount of money you want");
                 double am = sc.nextDouble(); 
-                
                 System.out.println("Are you sure?");
-                String con = sc2.nextLine();
+                String con = sc2.nextLine(); */
                 
-                Employee em1 = new Employee(na, ln,accn, acct, am, con,true);
-                
-                System.out.println("Type the amount of money you want");
+                em1.addFounds(10000.0, "y");
+                System.out.println(em1.getAccount());
+
+                em1.addFounds(4000.00, "y");
+                System.out.println(em1.getAccount());
+
+
+                /*     System.out.println("Type the amount of money you need");
                 am = sc.nextDouble(); 
                 System.out.println("Are you sure?");
-                con = sc2.nextLine();
-                
-                em1.addFounds(am, con);
-                
-                System.out.println("Type the amount of money you need");
-                am = sc.nextDouble(); 
-                System.out.println("Are you sure?");
-                con = sc2.nextLine();
+                con = sc2.nextLine(); */
 
-                em1.takeFounds(am, con);
 
-                System.out.println("Type the amount of money you need");
-                am = sc.nextDouble(); 
-                System.out.println("Are you sure?");
-                con = sc2.nextLine();
 
-                em1.takeFounds(am, con);
-                }else {
-                    System.out.println("Invalid input, please try again");
-                }    
+                em1.takeFounds(1000.00, "y");
+                System.out.println(em1.getAccount());
+
+
         }else{
             System.out.println("Invalid input");
         }
