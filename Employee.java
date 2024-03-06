@@ -1,8 +1,9 @@
+import java.util.*;
 public class Employee {
     private String name;
     private String lastName;
-    private BankAccount account;
     private boolean status=false;
+    private ArrayList<BankAccount> accounts = new ArrayList<BankAccount> ();
 
     public Employee(String name, String lastName) {
         this.name = name;
@@ -15,7 +16,7 @@ public class Employee {
         this.lastName = lastName;
         if((accType=='A' || accType=='B' || accType=='C') && accountNumber>=1){
             System.out.printf("Registred employee: %s %s %n", this.name,this.lastName);
-        this.account = new BankAccount(accountNumber, accType);
+        accounts.add(new BankAccount(accountNumber, accType));
         this.status = status;
         } else{
             System.out.println("Invalid account");
@@ -41,14 +42,14 @@ public class Employee {
     }
 
     public void setBankAccount(long accountNumber, char accType, boolean status){
-        this.account = new BankAccount(accountNumber, accType);
+        accounts.add(new BankAccount(accountNumber, accType));
         this.status = status;
     }
 
-    public String getAccount(){
+    public String getAccount(int p){
         String seeAcc = "None";
         if(getStatus()==true){
-           seeAcc = "Account number: "+account.getAccountNumber()+", current money: $"+account.getAmount()+" & account type: "+account.getAccountType();
+           seeAcc = "Account number: "+accounts.get(p-1).getAccountNumber()+", current money: $"+accounts.get(p-1).getAmount()+" & account type: "+accounts.get(p-1).getAccountType();
             return seeAcc;
         }
         else{
@@ -56,18 +57,18 @@ public class Employee {
         }
     }
 
-    public void addFounds(double amount, String c){
+    public void addFounds(int p, double amount, String c){
         if (getStatus()==true) {
-            account.addAmount(amount, c);    
+            accounts.get(p-1).addAmount(amount, c);   
         }else{
             System.out.println("There's no account registred.");
         }
         
     }
 
-    public void takeFounds(double amount, String c){
+    public void takeFounds(int p,double amount, String c){
         if (getStatus()==true) {
-            account.takeAmount(amount, c);    
+            accounts.get(p-1).takeAmount(amount, c);    
         }else{
             System.out.println("There's no account registred.");
         }

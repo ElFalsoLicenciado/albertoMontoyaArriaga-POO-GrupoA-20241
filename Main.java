@@ -29,7 +29,7 @@ public class Main {
             char acct = sc.next().charAt(0);
 
             Employee em1 = new Employee(na, ln,accn, acct,true);
-            System.out.println(em1.getAccount());
+            System.out.println(em1.getAccount(0));
                 
 
         } else if (o==3){
@@ -50,11 +50,11 @@ public class Main {
                 System.out.println("Are you sure?");
                 String con = sc2.nextLine(); */
                 
-                em1.addFounds(10000.0, "y");
-                System.out.println(em1.getAccount());
+                em1.addFounds(1,10000.0, "y");
+                System.out.println(em1.getAccount(1));
 
-                em1.addFounds(4000.00, "y");
-                System.out.println(em1.getAccount());
+                em1.addFounds(1,4000.00, "y");
+                System.out.println(em1.getAccount(1));
 
 
                 /*     System.out.println("Type the amount of money you need");
@@ -64,8 +64,8 @@ public class Main {
 
 
 
-                em1.takeFounds(1000.00, "y");
-                System.out.println(em1.getAccount());
+                em1.takeFounds(1,1000.00, "y");
+                System.out.println(em1.getAccount(1));
 
 
         }else{
