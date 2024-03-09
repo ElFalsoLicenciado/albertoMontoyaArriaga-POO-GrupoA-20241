@@ -1,171 +1,130 @@
+import java.util.Random;
+
 public class BankAccount {
     private long accountNumber;
-    private double amount;
+    private double amount=0.00;
+    private double mxamount;
+    private double mnamount;
     private char accType;
+    private boolean status = true;
+    private Random r1 = new Random();
 
-    public BankAccount(long accountNumber,char accType) {
-        this.accountNumber = accountNumber;
-        this.accType = accType;
-        System.out.printf("New accout: account number: %s & account type: %s %n" ,getAccountNumber(), getAccountType());
 
-    }
-
-    public BankAccount(long accountNumber,char accType, double amount, String con) {
-        this.accountNumber = accountNumber;
-        this.accType = accType;
-        addAmount(amount, con);
-        System.out.printf("New accout: account number: %s, account type: %s & current money: $%s %n" ,getAccountNumber(), getAccountType(),getAmount());
-        
-    }
-
-    public long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public char getAccountType(){
-        return accType;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-    
-
-    public void addAmount(double amount, String c) {
-        if(getAccountType()=='A'){
-            if ((amount>=0.00)&&((this.amount+amount)<=50000.00)) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount+amount;
-                    System.out.printf("You added $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-            } else if ((amount>=0.00)&&((this.amount+amount)>50000.00)){
-                if(Confirmation(c)==true) {
-                    System.out.println("Not enough space");
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-
+        public BankAccount(char accType) {
+            boolean flag = false;
+            flag = setType(accType);
+            if (flag==true) {
+                this.accountNumber = r1.nextInt(99999);
+                System.out.printf("New accout: account number: %s & account type: %s %n" ,getAccountNumber(), getAccountType());    
             }else{
-                System.out.println("Not possible");
-            }
-
-        }else if(getAccountType()=='B'){
-            if ((amount>=0.00)&&((this.amount+amount)<=100000.00)) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount+amount;
-                    System.out.printf("You added $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-
-                }else{
-                    System.out.println("Cancelled");
-                }
-
-            } else if ((amount>=0.00)&&((this.amount+amount)>100000.00)){
-                if(Confirmation(c)==true) {
-                    System.out.println("Not enough space");
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-                           
-            }else{
-                System.out.println("Not possible");
-            }   
-        
-        }else if(getAccountType()=='C'){
-            if (amount>=0.00) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount+amount;
-                    System.out.printf("You added $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());       
-                }else{
-                System.out.println("Cancelled.");
-                }
-
-            }else{
-                System.out.println("Not possible");
-            }    
-        
-        }
-    }
-
-    public void takeAmount(double amount, String c) {
-        if(getAccountType()=='A'){
-            if ((amount>=0.00)&&((this.amount-amount)>=1000.00)) {
-                if(Confirmation(c)==true) {
-                    this.amount = this.amount-amount;
-                    System.out.printf("You took $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-
-            }else if ((amount>=0.00)&&((this.amount-amount)<1000.00)){
-                if(Confirmation(c)==true) {
-                    System.out.println("You can't have less than $1,000.00");
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-                                           
-            }else{
-                System.out.println("Not possible");
-            }
-
-        }else if(getAccountType()=='B'){
-            if ((amount>=0.00)&&((this.amount-amount)>=5000.00)) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount-amount;
-                    System.out.printf("You took $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-
-                }else{
-                    System.out.println("Cancelled");
-                }
-
-            }else if ((amount>=0.00)&&((this.amount-amount)<5000.00)){
-                if(Confirmation(c)==true) {
-                    System.out.println("You can't have less than $5,000.00");
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
-                           
-            }else{
-                System.out.println("Not possible");
-            }   
-        
-        }else if(getAccountType()=='C'){
-            if ((amount>=0.00)&&((this.amount-amount)>=10000.00)) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount-amount;
-                    System.out.printf("You took $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-               
-                }else{
-                System.out.println("Cancelled.");
-                }
-
-            }else if((amount>=0.00)&&((this.amount-amount)<10000.00)){
-                if(Confirmation(c)==true) {
-                    System.out.println("You can't have less than $5,000.00");
-
-                }else{
-                    System.out.println("Cancelled.");
-                }
+                System.out.println("Incorrect account type");
                 
+            }
+            
+        }
+
+        public BankAccount(char accType, double amount, String con) {
+            boolean flag = false;
+            flag = setType(accType);
+
+            if (flag==true) {
+                this.accountNumber = r1.nextInt(99999);
+                addAmount(amount, con);
+                System.out.printf("New accout: account number: %s, account type: %s & current money: $%s %n" ,getAccountNumber(), getAccountType(),getAmount());    
+            }else{
+                System.out.println("Incorrect account type");
+            }
+                    
+        }  
+
+        public long getAccountNumber() {
+            return accountNumber;
+        }
+
+        public char getAccountType(){
+            return accType;
+        }
+
+        public double getAmount() {
+        return amount;
+        }
+
+
+        public void addAmount(double amount, String c) {
+                if ((amount>=0.00)&&((this.amount+amount)<=mxamount)) {
+                    if(Confirmation(c)==true) {
+                        this.amount =this.amount+amount;
+                        System.out.printf("You added $%s %n",amount);
+                        System.out.printf("You have $%s in your account.%n",getAmount());
+
+                    }else{
+                        System.out.println("Cancelled.");
+                    }
+                }else if ((amount>=0.00)&&((this.amount+amount)>mxamount)){
+                    if(Confirmation(c)==true) {
+                        System.out.println("You can't have more than: $"+mxamount);
+
+                    }else{
+                        System.out.println("Cancelled.");
+                    }
+
+                }else{
+                    System.out.println("Not possible");
+                }
+        }
+
+        public void takeAmount(double amount, String c) {
+            if ((amount>=0.00)&&((this.amount-amount)>=mnamount)) {
+                if(Confirmation(c)==true) {
+                    this.amount =this.amount-amount;
+                    System.out.printf("You took $%s %n",amount);
+                    System.out.printf("You have $%s in your account.%n",getAmount());
+                }else{
+                    System.out.println("Cancelled.");
+                }
+            }else if ((amount>=0.00)&&((this.amount-amount)<mnamount)){
+                if(Confirmation(c)==true) {
+                    System.out.println("You can't have less than: $"+mnamount);
+                }else{
+                    System.out.println("Cancelled.");
+                }
             }else{
                 System.out.println("Not possible");
-            }    
-        
+            }
+        }    
+ 
+    public boolean setType(char type){
+        boolean f = false;
+        switch (type) {
+            
+                case 'a':
+                mxamount = 50000.00;
+                mnamount = 1000.00;
+                this.accType = 'A';
+                break;
+            
+                case 'b':
+                mxamount = 100000.00;
+                mnamount = 5000.00;
+                this.accType = 'B';
+                f = true;
+                break;
+            
+                case 'c':
+                mxamount = Double.MAX_VALUE;
+                mnamount = 10000.00;
+                this.accType = 'C';
+                f = true;
+                break;
+            
+                default:
+                System.out.println("Invalid type of account");
+                f = false;
+                break;
         }
+        return f;
     }
+
 
     public boolean Confirmation(String c){
         boolean f=false;
@@ -176,4 +135,9 @@ public class BankAccount {
         }
         return f;
     }
+
+    public boolean getStatus(){
+        return status;
+    }
+
 }
