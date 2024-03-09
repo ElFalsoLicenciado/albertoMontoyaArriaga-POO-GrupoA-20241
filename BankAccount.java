@@ -6,13 +6,13 @@ public class BankAccount {
     private double mxamount;
     private double mnamount;
     private char accType;
-    private boolean status = true;
+    private boolean validity = true;
     private Random r1 = new Random();
 
 
         public BankAccount(char accType) {
             boolean flag = false;
-            flag = setType(accType);
+            flag = setAccountType(accType);
             if (flag==true) {
                 this.accountNumber = r1.nextInt(99999);
                 System.out.printf("New accout: account number: %s & account type: %s %n" ,getAccountNumber(), getAccountType());    
@@ -25,7 +25,7 @@ public class BankAccount {
 
         public BankAccount(char accType, double amount, String con) {
             boolean flag = false;
-            flag = setType(accType);
+            flag = setAccountType(accType);
 
             if (flag==true) {
                 this.accountNumber = r1.nextInt(99999);
@@ -41,6 +41,43 @@ public class BankAccount {
             return accountNumber;
         }
 
+        public void setAccountNumber(long accountNumber) {
+            this.accountNumber = accountNumber;
+        }
+        
+        public boolean setAccountType(char type){
+            boolean f = false;
+            switch (type) {
+                
+                    case 'a':
+                    mxamount = 50000.00;
+                    mnamount = 1000.00;
+                    this.accType = 'A';
+                    break;
+                
+                    case 'b':
+                    mxamount = 100000.00;
+                    mnamount = 5000.00;
+                    this.accType = 'B';
+                    f = true;
+                    break;
+                
+                    case 'c':
+                    mxamount = Double.MAX_VALUE;
+                    mnamount = 10000.00;
+                    this.accType = 'C';
+                    f = true;
+                    break;
+                
+                    default:
+                    System.out.println("Invalid type of account");
+                    f = false;
+                    break;
+            }
+            return f;
+        }
+    
+        
         public char getAccountType(){
             return accType;
         }
@@ -49,6 +86,14 @@ public class BankAccount {
         return amount;
         }
 
+        public void setStatus(boolean validity){
+            this.validity = validity; 
+        }
+    
+
+        public boolean getStatus(){
+            return validity;
+        }
 
         public void addAmount(double amount, String c) {
                 if ((amount>=0.00)&&((this.amount+amount)<=mxamount)) {
@@ -93,37 +138,6 @@ public class BankAccount {
             }
         }    
  
-    public boolean setType(char type){
-        boolean f = false;
-        switch (type) {
-            
-                case 'a':
-                mxamount = 50000.00;
-                mnamount = 1000.00;
-                this.accType = 'A';
-                break;
-            
-                case 'b':
-                mxamount = 100000.00;
-                mnamount = 5000.00;
-                this.accType = 'B';
-                f = true;
-                break;
-            
-                case 'c':
-                mxamount = Double.MAX_VALUE;
-                mnamount = 10000.00;
-                this.accType = 'C';
-                f = true;
-                break;
-            
-                default:
-                System.out.println("Invalid type of account");
-                f = false;
-                break;
-        }
-        return f;
-    }
 
 
     public boolean Confirmation(String c){
@@ -136,8 +150,5 @@ public class BankAccount {
         return f;
     }
 
-    public boolean getStatus(){
-        return status;
-    }
 
 }
