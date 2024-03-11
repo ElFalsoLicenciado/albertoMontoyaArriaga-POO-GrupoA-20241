@@ -1,154 +1,76 @@
 import java.util.Random;
 
 public class BankAccount {
-    private long accountNumber;
-    private double amount=0.00;
-    private double mxamount;
-    private double mnamount;
+    private double funds = 0;
+    private int accNumber;
     private char accType;
-    private boolean validity = true;
-    private Random r1 = new Random();
+    private double mxFunds;
+    private double mnFunds;
+    private boolean validAcc = true;
+    private Random r = new Random();
 
-
-        public BankAccount(char accType) {
-            boolean flag = false;
-            flag = setAccountType(accType);
-            if (flag==true) {
-                this.accountNumber = r1.nextInt(99999);
-                System.out.printf("New accout: account number: %s & account type: %s %n" ,getAccountNumber(), getAccountType());    
-            }else{
-                System.out.println("Incorrect account type");
-                
-            }
-            
-        }
-
-        public BankAccount(char accType, double amount, String con) {
-            boolean flag = false;
-            flag = setAccountType(accType);
-
-            if (flag==true) {
-                this.accountNumber = r1.nextInt(99999);
-                addAmount(amount, con);
-                System.out.printf("New accout: account number: %s, account type: %s & current money: $%s %n" ,getAccountNumber(), getAccountType(),getAmount());    
-            }else{
-                System.out.println("Incorrect account type");
-            }
-                    
-        }  
-
-        public long getAccountNumber() {
-            return accountNumber;
-        }
-
-        public void setAccountNumber(long accountNumber) {
-            this.accountNumber = accountNumber;
-        }
-        
-        public boolean setAccountType(char type){
-            boolean f = false;
-            switch (type) {
-                
-                    case 'a':
-                    mxamount = 50000.00;
-                    mnamount = 1000.00;
-                    this.accType = 'A';
-                    break;
-                
-                    case 'b':
-                    mxamount = 100000.00;
-                    mnamount = 5000.00;
-                    this.accType = 'B';
-                    f = true;
-                    break;
-                
-                    case 'c':
-                    mxamount = Double.MAX_VALUE;
-                    mnamount = 10000.00;
-                    this.accType = 'C';
-                    f = true;
-                    break;
-                
-                    default:
-                    System.out.println("Invalid type of account");
-                    f = false;
-                    break;
-            }
-            return f;
-        }
-    
-        
-        public char getAccountType(){
-            return accType;
-        }
-
-        public double getAmount() {
-        return amount;
-        }
-
-        public void setStatus(boolean validity){
-            this.validity = validity; 
-        }
-    
-
-        public boolean getStatus(){
-            return validity;
-        }
-
-        public void addAmount(double amount, String c) {
-                if ((amount>=0.00)&&((this.amount+amount)<=mxamount)) {
-                    if(Confirmation(c)==true) {
-                        this.amount =this.amount+amount;
-                        System.out.printf("You added $%s %n",amount);
-                        System.out.printf("You have $%s in your account.%n",getAmount());
-
-                    }else{
-                        System.out.println("Cancelled.");
-                    }
-                }else if ((amount>=0.00)&&((this.amount+amount)>mxamount)){
-                    if(Confirmation(c)==true) {
-                        System.out.println("You can't have more than: $"+mxamount);
-
-                    }else{
-                        System.out.println("Cancelled.");
-                    }
-
-                }else{
-                    System.out.println("Not possible");
-                }
-        }
-
-        public void takeAmount(double amount, String c) {
-            if ((amount>=0.00)&&((this.amount-amount)>=mnamount)) {
-                if(Confirmation(c)==true) {
-                    this.amount =this.amount-amount;
-                    System.out.printf("You took $%s %n",amount);
-                    System.out.printf("You have $%s in your account.%n",getAmount());
-                }else{
-                    System.out.println("Cancelled.");
-                }
-            }else if ((amount>=0.00)&&((this.amount-amount)<mnamount)){
-                if(Confirmation(c)==true) {
-                    System.out.println("You can't have less than: $"+mnamount);
-                }else{
-                    System.out.println("Cancelled.");
-                }
-            }else{
-                System.out.println("Not possible");
-            }
-        }    
- 
-
-
-    public boolean Confirmation(String c){
-        boolean f=false;
-        if (c.equalsIgnoreCase("y")||c.equalsIgnoreCase("yes")) {
-            f = true;
-        }else if (c.equalsIgnoreCase("n")||c.equalsIgnoreCase("no")){
-            f = false;
-        }
-        return f;
+    public BankAccount(){
+        accNumber = r.nextInt(1000, 9999);
     }
 
+    public String isValidAcc() {
+        String status;
+        if(validAcc==true){
+            status="Active";
+        }else{
+            status="Inactive";
+        }
+        return status;
+    }
 
+    public void setValidAcc(boolean validAcc) {
+        this.validAcc = validAcc;
+    }
+
+    public double getFunds() {
+        return funds;
+    }
+
+    public int getAccNumber() {
+        return accNumber;
+    }
+
+    public void setAccNumber(int accNumber) {
+        this.accNumber = accNumber;
+    }
+
+    public char getAccType() {
+        return accType;
+    }
+
+    public void setAccType(char accType) {
+        this.accType = accType;
+
+        switch (accType) {
+            case 'a':  mxFunds = 50000; mnFunds = 1000; break;
+            case 'b': mxFunds = 100000; mnFunds = 5000; break;
+            case 'c': mxFunds = Double.MAX_VALUE; mnFunds = 10000; break;
+            default : {
+                System.out.println("Could not create or modify that account type");
+                validAcc = false;
+                this.accType = '~';
+            }
+        }
+    }
+
+    public void addFunds(double amount) {
+        if (funds + amount > mxFunds || amount < 0) {
+            System.out.println("Could not deposit that amount");
+        } else {
+            funds = funds + amount;
+        }
+    }
+
+    public void takeFunds(double amount) {
+        if (funds - amount < mnFunds || amount < 0) {
+            System.out.println("Could not withdraw that amount");
+        } else {
+            funds = funds - amount;
+        }
+    }
 }

@@ -1,33 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Employee {
     private String name;
     private String lastName;
-    private ArrayList<BankAccount> acAccount = new ArrayList<BankAccount> ();
-    private ArrayList<BankAccount> inAccounts = new ArrayList<BankAccount>();
+    private ArrayList<BankAccount> accounts = new ArrayList<>();
+    private ArrayList<BankAccount> invalidAccs = new ArrayList<>();
+    private boolean f = false;
 
-    public Employee(String name, String lastName) {
-        this.name = name;
-        this.lastName = lastName;
-        System.out.printf("%n Registred employee: %s %s %n", this.name,this.lastName);
+    public ArrayList<BankAccount> getInvalidAccs() {
+        return invalidAccs;
     }
-
-    public Employee(String name, String lastName, char accType) {
-        this.name = name;
-        this.lastName = lastName;
-        System.out.printf("%n Registred employee: %s %s %n", this.name,this.lastName);
-        
-
-    }
-
-    public Employee (String name, String lastName, char accType, double amount, String con){
-        this.name = name;
-        this.lastName = lastName;
-        System.out.printf("%n Registred employee: %s %s %n", this.name,this.lastName);
-        
-    }
-
-    
 
     public String getName() {
         return name;
@@ -41,29 +23,35 @@ public class Employee {
         return lastName;
     }
 
+    public boolean getValidity(){
+        return f;
+    }
+
+    public void setValidity(boolean f){
+        this.f=f;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-
-
-
-    public void addFounds(int p, double amount, String c){
-        if (getStatus(p)==true) {
-            accounts.get(p-1).addAmount(amount, c);   
-        }else{
-            System.out.println("There's no account registred.");
-        }
-        
+    public ArrayList<BankAccount> getAccounts() {
+        return accounts;
     }
 
-    public void takeFounds(int p,double amount, String c){
-        if (getStatus(p)==true) {
-            accounts.get(p-1).takeAmount(amount, c);    
-        }else{
-            System.out.println("The account is not valid.");
+    public void getFunds(int i) {
+        System.out.println(accounts.get(i).getFunds());
+    }
+
+    public void showAccounts() {
+        int i = 1;
+
+        System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", "#", "ID", "Type", "Status", "Funds");
+        for (BankAccount toShow : accounts) {
+            System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", i,toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(), toShow.getFunds());
+            i ++;
         }
     }
 
-
+    
 }
