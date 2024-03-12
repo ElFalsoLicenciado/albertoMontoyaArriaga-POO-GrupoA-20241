@@ -43,6 +43,17 @@ public class Employee {
         System.out.println(accounts.get(i).getFunds());
     }
 
+    public void showValidAccounts() {
+        int i = 1;
+
+        System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", "#", "ID", "Type", "Status", "Funds");
+        for (BankAccount toShow : accounts) {
+            System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", i,toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(), toShow.getFunds());
+            i ++;
+        }
+    }
+    
+
     public void showAccounts() {
         int i = 1;
 

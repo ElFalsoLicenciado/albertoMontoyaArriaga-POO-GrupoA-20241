@@ -8,7 +8,7 @@ public class Main {
         int opt = -1, p=0; double q=0;
         Employee employeeTrial;
         BankAccount trialAccount;
-        boolean f = false;
+        boolean flag = false;
 
         while (opt != 0) {
             System.out.println("1. Register an employee.");
@@ -19,7 +19,7 @@ public class Main {
                     {
                     try{
                         opt = sc.nextInt();   
-                        f = true;
+                        flag = true;
                     }catch (InputMismatchException e){
                         System.out.println("Invalid input.");
                         System.out.println("\n1. Register an employee.");
@@ -27,9 +27,9 @@ public class Main {
                         System.out.println("0. Go back.");
                         sc.nextLine();
                     }
-                }while(f==false);
+                }while(flag==false);
 
-                f = false;
+                flag = false;
             
 
                 switch (opt) {
@@ -41,16 +41,16 @@ public class Main {
                     {
                         try{
                             opt = sc.nextInt();   
-                            f = true;
+                            flag = true;
                         }catch (InputMismatchException e){
                             System.out.println("Invalid input.");
                             System.out.println("\n1. Register an employee.\n2. Register an employee + bank account.\n3. Register an employee + bank account & funds.");
                             System.out.println("4. Employee list.\n0. Quit.");
                             sc.nextLine();
                         }
-                    }while(f==false);
+                    }while(flag==false);
                 
-                    f = false;
+                    flag = false;
                     
                     switch (opt) {
                                 case 1 :
@@ -85,15 +85,15 @@ public class Main {
                                         {
                                             try{
                                                 q = sc.nextDouble();   
-                                                f = true;
+                                                flag = true;
                                             }catch (InputMismatchException e){
                                                 System.out.println("Invalid input.");
                                                 System.out.print("Write the amount you want to add ");
                                             sc.nextLine();
                                             }
-                                        }while(f==false);
+                                        }while(flag==false);
 
-                                        f = false;
+                                        flag = false;
                                 
                                         employeeTrial.getAccounts().get(0).addFunds(q); 
                                         System.out.print("Current funds: $");
@@ -135,15 +135,15 @@ public class Main {
                                         {
                                         try{
                                             p2 = sc.nextInt();   
-                                            f = true;
+                                            flag = true;
                                         }catch (InputMismatchException e){
                                             System.out.println("Invalid input.");
                                             System.out.print("\nSelect an employee ");
                                         sc.nextLine();
                                         }
-                                    }while(f==false);
+                                    }while(flag==false);
                                     
-                                    f = false;
+                                    flag = false;
                                     
                                     if (p2<1 || p2>EmpsRepo.empList.size()) {
                                         System.out.println("Out of bonds.");
@@ -171,7 +171,7 @@ public class Main {
         int opt=0, p=0;
         double q=0;
         BankAccount theAccount;
-        boolean f = false;
+        boolean flag = false;
 
             do {
             System.out.println("\n1. Deposit funds.\n2. Withdraw funds.\n3. Manage bank accounts\n0. Return.");
@@ -180,7 +180,7 @@ public class Main {
                 {
                     try{
                         opt = sc.nextInt();   
-                        f = true;
+                        flag = true;
                     }catch (InputMismatchException e){
                         System.out.println("Invalid input. \n");
                         System.out.println("\n1. Deposit funds.\n2. Withdraw funds.\n3. Manage bank accounts\n0. Return.");
@@ -188,21 +188,21 @@ public class Main {
             
                         sc.nextLine();
                     }
-                }while(f==false);
+                }while(flag==false);
                 
-                f = false;
+                flag = false;
             
                 switch (opt) {
                     case 1 :
                         if(emp.getValidity()==true){
-                        emp.showAccounts();
+                            emp.showValidAccounts();
                         System.out.print("\nWhich bank account? ");
                             
                             do
                             {
                                 try{
                                     p = sc.nextInt();   
-                                    f = true;
+                                    flag = true;
                                 }catch (InputMismatchException e){
                                     System.out.println("Invalid input. \n");
                                     emp.showAccounts();
@@ -210,9 +210,9 @@ public class Main {
                                     sc.nextLine();
                                 }
                             
-                            }while(f==false);
+                            }while(flag==false);
                             
-                            f = false;
+                            flag = false;
 
                         if(p<1 || p>emp.getAccounts().size()){
                                     System.out.println("Out of bounds");
@@ -225,15 +225,16 @@ public class Main {
                                 {
                                     try{
                                         q = sc.nextDouble();   
-                                        f = true;
+                                        flag = true;
                                     }catch (InputMismatchException e){
                                         System.out.println("Invalid input. \n");
-                                        emp.showAccounts();
+                                        emp.showValidAccounts();
                                         System.out.print ("\nWrite the amount you want to add ");
                                         sc.nextLine();
                                     }
-                                }while(f==false);
-                            f = false;
+                                }while(flag==false);
+                            flag = false;
+
                                 theAccount.addFunds(q);
                             } else {
                                 System.out.println("\nCannot deposit to such account, invalid account.");
@@ -247,23 +248,23 @@ public class Main {
 
                     case 2 :
                     if(emp.getValidity()==true){
-                        emp.showAccounts();
+                        emp.showValidAccounts();
                         System.out.print("\nWhich bank account? " );
                             
                             do
                             {
                                 try{
                                     p = sc.nextInt();   
-                                    f = true;
+                                    flag = true;
                                 }catch (InputMismatchException e){
                                     System.out.println("Invalid input. \n");
-                                    emp.showAccounts();
+                                    emp.showValidAccounts();
                                     System.out.println("\nWhich bank account? ");
                                     sc.nextLine();
                                 }
-                            }while(f==false);
+                            }while(flag==false);
 
-                        f = false;
+                        flag = false;
 
                         if(p<1 || p>emp.getAccounts().size()){
                             System.out.println("Out of bounds");
@@ -276,16 +277,16 @@ public class Main {
                             {
                                 try{
                                     q = sc.nextDouble();   
-                                    f = true;
+                                    flag = true;
                                 }catch (InputMismatchException e){
                                     System.out.println("Invalid input. \n");
-                                    emp.showAccounts();
+                                    emp.showValidAccounts();
                                     System.out.print("\nWrite the amount you want to take ");
                                     sc.nextLine();
                                 }
-                            }while(f==false);
+                            }while(flag==false);
                         
-                        f = false;
+                        flag = false;
 
                         theAccount.takeFunds(q);
                         }else{
@@ -304,14 +305,14 @@ public class Main {
                         {
                             try{
                                 p = sc.nextInt();   
-                                f = true;
+                                flag = true;
                             }catch (InputMismatchException e){
                                 System.out.println("Invalid input. \n");
                                 System.out.println("\n1. Create a bank account\n2. Activate an existing account\n3. Show accounts \n0. Return" );
                                 sc.nextLine();
                             }
-                        }while(f==false);
-                    f = false;
+                        }while(flag==false);
+                    flag = false;
                     
                         switch (p) {
                             case 1 : 
