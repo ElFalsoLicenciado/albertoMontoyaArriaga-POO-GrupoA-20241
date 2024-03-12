@@ -15,7 +15,6 @@ public class UtilityMethods {
         type = ui.charAt(0);
         System.out.println();
         empAcc.setAccType(type);
-
         return empAcc;
     }
 
@@ -54,7 +53,7 @@ public class UtilityMethods {
         if(emp.getValidity()==true){
 
             if (emp.getInvalidAccs().isEmpty()) {
-                System.out.println("Theres no accounts to change.\n");
+                System.out.println("\nTheres no accounts to change.");
             } else {
                 UtilityMethods.showInvalidAccs(emp);
                 System.out.print("\nWhat account do you want to change? ");
@@ -64,7 +63,7 @@ public class UtilityMethods {
                 toChange = emp.getInvalidAccs().get(p - 1);
 
                 System.out.print("\nChange the account type: ");
-                ui = sc.nextLine().substring(0,0);
+                ui = sc.nextLine().substring(0,1);
                 ui = ui.toLowerCase();
                 char type = ui.charAt(0);
                 toChange.setAccType(type);

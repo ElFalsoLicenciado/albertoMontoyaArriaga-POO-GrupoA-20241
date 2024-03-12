@@ -51,6 +51,10 @@ public class Employee {
             System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", i,toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(), toShow.getFunds());
             i ++;
         }
+        for (BankAccount toShow : invalidAccs) {
+            System.out.printf("| %-3s | %-4s | %-6s | %-8s | %-14s |%n", i,toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(), toShow.getFunds());
+            i ++;
+        }
     }
 
     

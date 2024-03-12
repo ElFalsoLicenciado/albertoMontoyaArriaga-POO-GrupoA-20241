@@ -59,16 +59,23 @@ public class Main {
                                 case 2 :
                                     employeeTrial = UtilityMethods.createEmployee();
                                     trialAccount = UtilityMethods.createAccount();
-                                    employeeTrial.getAccounts().add(trialAccount);
+
+                                    if(trialAccount.isValidAcc()=="Active"){
+                                        employeeTrial.getAccounts().add(trialAccount);
+                                    }else{
+                                        employeeTrial.getInvalidAccs().add(trialAccount);
+                                    }
+                                    
                                     employeeTrial.setValidity(true);
+    
                                 break;
                                 case 3 : 
                                     employeeTrial = UtilityMethods.createEmployee();
                                     trialAccount = UtilityMethods.createAccount();
-                                    employeeTrial.getAccounts().add(trialAccount);
-                                    employeeTrial.setValidity(true);
+                                    
                     
                                     if (trialAccount.isValidAcc()=="Active") {
+                                        employeeTrial.getAccounts().add(trialAccount);
                                         System.out.print("Funds: $");
                                         employeeTrial.getFunds(0);
                                     
@@ -94,7 +101,9 @@ public class Main {
                                  
                                     } else {
                                         System.out.println("Cannot deposit to such account, invalid account.");
+                                        employeeTrial.getInvalidAccs().add(trialAccount);
                                     }
+                                    employeeTrial.setValidity(true);
                                 
                                 break;
 
@@ -231,7 +240,7 @@ public class Main {
                             }
                         }
                         }else{
-                        System.out.println("You have no account registred.");
+                        System.out.println("You haven't registred an account.");
                         }
 
                     break;
@@ -262,7 +271,7 @@ public class Main {
                         theAccount = emp.getAccounts().get(p - 1);
                         
                         if (theAccount.isValidAcc()=="Active") {
-                        System.out.print ("\nWrite the amount you want to take ");
+                        System.out.print("\nWrite the amount you want to take ");
                             do
                             {
                                 try{
@@ -271,7 +280,7 @@ public class Main {
                                 }catch (InputMismatchException e){
                                     System.out.println("Invalid input. \n");
                                     emp.showAccounts();
-                                    System.out.print ("\nWrite the amount you want to take ");
+                                    System.out.print("\nWrite the amount you want to take ");
                                     sc.nextLine();
                                 }
                             }while(f==false);
@@ -284,13 +293,13 @@ public class Main {
                         }
                     }    
                     }else{
-                        System.out.println("\nYou have no account registred.");
+                        System.out.println("\nYou haven't registred an account.");
                     }
                     
                     break;
 
                     case 3 :
-                    System.out.print("\n1. Create a bank account\n2. Activate an existing account\n3. Show accounts \n0. Return\n ");
+                    System.out.print("\n1. Create a bank account\n2. Activate an existing account\n3. Show accounts \n0. Return\n");
                         do
                         {
                             try{
@@ -298,7 +307,7 @@ public class Main {
                                 f = true;
                             }catch (InputMismatchException e){
                                 System.out.println("Invalid input. \n");
-                                System.out.println("\n1. Create a bank account\n2. Activate an existing account\n3. Show accounts \n0. Return " );
+                                System.out.println("\n1. Create a bank account\n2. Activate an existing account\n3. Show accounts \n0. Return" );
                                 sc.nextLine();
                             }
                         }while(f==false);
@@ -307,7 +316,12 @@ public class Main {
                         switch (p) {
                             case 1 : 
                                 BankAccount newAcc = UtilityMethods.createAccount();
-                                emp.getAccounts().add(newAcc);
+                                if(newAcc.isValidAcc()=="Active"){
+                                    emp.getAccounts().add(newAcc);
+                                }else{
+                                    emp.getInvalidAccs().add(newAcc);
+                                }
+                                
                                 emp.setValidity(true);
                             break;
 
