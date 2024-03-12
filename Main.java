@@ -91,14 +91,13 @@ public class Main {
                                         employeeTrial.getAccounts().get(0).addFunds(q); 
                                         System.out.print("Current funds: $");
                                         employeeTrial.getFunds(0); 
-                                
-                                        employeeTrial.getAccounts().remove(employeeTrial.getAccounts().size()-1); 
+                                 
                                     } else {
-                                        employeeTrial.getInvalidAccs().add(trialAccount);
+                                        System.out.println("Cannot deposit to such account, invalid account.");
                                     }
                                 
-                                    employeeTrial.getAccounts().add(trialAccount);
                                 break;
+
                                 case 4 : 
                                     int i = 1;
                                     System.out.println("");
@@ -243,7 +242,7 @@ public class Main {
                         System.out.print("\nWhich bank account? " );
                             
                             do
-                                {
+                            {
                                 try{
                                     p = sc.nextInt();   
                                     f = true;
@@ -261,7 +260,8 @@ public class Main {
                             System.out.println("Out of bounds");
                         }else{
                         theAccount = emp.getAccounts().get(p - 1);
-
+                        
+                        if (theAccount.isValidAcc()=="Active") {
                         System.out.print ("\nWrite the amount you want to take ");
                             do
                             {
@@ -279,7 +279,10 @@ public class Main {
                         f = false;
 
                         theAccount.takeFunds(q);
+                        }else{
+                            System.out.println("\nCannot deposit to such account, invalid account.");
                         }
+                    }    
                     }else{
                         System.out.println("\nYou have no account registred.");
                     }
@@ -344,7 +347,7 @@ class EmpsRepo {
 
         System.out.printf("\n| %-3s | %-15s |%n", "No.", "Name");
         for (Employee us : empList) {
-            System.out.printf("| %-3s | %-15s |%n", i, us.getName() + " " + us.getLastName());
+            System.out.printf("| %-3s | %-15s |", i, us.getName() + " " + us.getLastName());
             System.out.println(""); 
             i++;
         }
