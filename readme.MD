@@ -16,3 +16,13 @@
     - "El número de cuenta del empleado Pedro es 12345, su saldo es 10000 y la cuenta es de tipo A" (los datos son variables)
 
 3. Realizar todas las validaciones correspondientes y advertirle al usaurio antes de hacer cualquier modificación que debes utilizar la ```sobrecarga de métodos``` para que existan funciones con el mismo nombre pero realicen una función diferente.
+
+### En base al ejercicio del empleado y la cuenta bancaria, modificarlo para que ahora un empleado pueda tener múltiples cuentas bancarias, no solamente 1, además, incluir las siguientes opciones. (Utilizar un arreglo o un arrayList)
+
+    - Opción para mostrar a todos los usuarios con su información
+    - Opción mostrar la información de algún usuario en específico
+
+# Además, crear una clase llamada Banco, y que pueda almacenar todas las cuentas bancarias existentes en el sistema, y añadirle la opción para poder listar todas las cuentas existentes y alguna en específico.
+
+Realizar el ejercicio utilizando un menú (en consola) para que el usuario pueda seguir usando el programa hasta que desee salir de el.
+

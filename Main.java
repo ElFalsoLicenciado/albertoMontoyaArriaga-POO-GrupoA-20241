@@ -54,58 +54,68 @@ public class Main {
                     
                     switch (opt) {
                                 case 1 :
-                                    employeeTrial = UtilityMethods.createEmployee();
+                                    employeeTrial = Bank.createEmployee();
                                 break;
                                 case 2 :
                                     employeeTrial = UtilityMethods.createEmployee();
                                     trialAccount = UtilityMethods.createAccount();
 
-                                    if(trialAccount.isValidAcc()=="Active"){
-                                        employeeTrial.getAccounts().add(trialAccount);
-                                    }else{
-                                        employeeTrial.getInvalidAccs().add(trialAccount);
+                                    if(UtilityMethods.confirmation()==true){
+                                        if(trialAccount.isValidAcc()=="Active"){
+                                            employeeTrial.getAccounts().add(trialAccount);
+                                        }else{
+                                            employeeTrial.getInvalidAccs().add(trialAccount);
+                                        }
+                                        
+                                        employeeTrial.setValidity(true);    
+                                    } else{
+                                        System.out.println("\nCancelled.");
                                     }
+
                                     
-                                    employeeTrial.setValidity(true);
-    
                                 break;
                                 case 3 : 
                                     employeeTrial = UtilityMethods.createEmployee();
                                     trialAccount = UtilityMethods.createAccount();
                                     
-                    
-                                    if (trialAccount.isValidAcc()=="Active") {
-                                        employeeTrial.getAccounts().add(trialAccount);
-                                        System.out.print("Funds: $");
-                                        employeeTrial.getFunds(0);
-                                    
-                                        System.out.print("\n Write the amount you want to add ");
+                                    if(UtilityMethods.confirmation()==true){   
+                                        if (trialAccount.isValidAcc()=="Active") {
+                                            employeeTrial.getAccounts().add(trialAccount);
+                                            System.out.print("Funds: $");
+                                            employeeTrial.getFunds(0);
+                                        
+                                            System.out.print("\nWrite the amount you want to add ");
 
-                                        do
-                                        {
-                                            try{
-                                                q = sc.nextDouble();   
-                                                flag = true;
-                                            }catch (InputMismatchException e){
-                                                System.out.println("Invalid input.");
-                                                System.out.print("Write the amount you want to add ");
-                                            sc.nextLine();
+                                            do
+                                            {
+                                                try{
+                                                    q = sc.nextDouble();   
+                                                    flag = true;
+                                                }catch (InputMismatchException e){
+                                                    System.out.println("Invalid input.");
+                                                    System.out.print("\nWrite the amount you want to add ");
+                                                sc.nextLine();
+                                                }
+                                            }while(flag==false);
+
+                                            flag = false;
+                                            if(UtilityMethods.confirmation()==true){
+                                                employeeTrial.getAccounts().get(0).addFunds(q); 
+                                                System.out.print("Current funds: $");
+                                                employeeTrial.getFunds(0); 
+                                            }else{
+                                                System.out.println("\nCancelled.");
                                             }
-                                        }while(flag==false);
-
-                                        flag = false;
-                                
-                                        employeeTrial.getAccounts().get(0).addFunds(q); 
-                                        System.out.print("Current funds: $");
-                                        employeeTrial.getFunds(0); 
-                                 
-                                    } else {
-                                        System.out.println("Cannot deposit to such account, invalid account.");
-                                        employeeTrial.getInvalidAccs().add(trialAccount);
+                                            
+                                        } else {
+                                            System.out.println("Cannot deposit to such account, invalid account.");
+                                            employeeTrial.getInvalidAccs().add(trialAccount);
+                                        }
+                                        employeeTrial.setValidity(true);
+                                    } else{
+                                        System.out.println("\nCancelled.");
                                     }
-                                    employeeTrial.setValidity(true);
-                                
-                                break;
+                                    break;
 
                                 case 4 : 
                                     int i = 1;
@@ -233,11 +243,15 @@ public class Main {
                                         sc.nextLine();
                                     }
                                 }while(flag==false);
+
                             flag = false;
 
+                                if(UtilityMethods.confirmation()==true){       
                                 theAccount.addFunds(q);
-                            } else {
-                                System.out.println("\nCannot deposit to such account, invalid account.");
+                                }else{
+                                    System.out.println("\nCancelled.");
+                                }
+                            }else {
                             }
                         }
                         }else{
@@ -288,9 +302,12 @@ public class Main {
                         
                         flag = false;
 
-                        theAccount.takeFunds(q);
+                        if(UtilityMethods.confirmation()==true){       
+                            theAccount.takeFunds(q);
+                            }else{
+                                System.out.println("\nCancelled.");
+                            }
                         }else{
-                            System.out.println("\nCannot deposit to such account, invalid account.");
                         }
                     }    
                     }else{
@@ -317,13 +334,19 @@ public class Main {
                         switch (p) {
                             case 1 : 
                                 BankAccount newAcc = UtilityMethods.createAccount();
-                                if(newAcc.isValidAcc()=="Active"){
-                                    emp.getAccounts().add(newAcc);
-                                }else{
-                                    emp.getInvalidAccs().add(newAcc);
-                                }
                                 
-                                emp.setValidity(true);
+                                if(UtilityMethods.confirmation()==true){    
+                                
+                                    if(newAcc.isValidAcc()=="Active"){
+                                        emp.getAccounts().add(newAcc);
+                                    }else{
+                                        emp.getInvalidAccs().add(newAcc);
+                                    }
+                                    emp.setValidity(true);
+                                
+                                }else{
+                                    System.out.println("Cancelled");
+                                }
                             break;
 
                             case 2 : 

@@ -25,7 +25,6 @@ public class UtilityMethods {
                 
             }
         } while (flag==false);
-
         empAcc.setAccType(type);
         return empAcc;
     }
@@ -92,20 +91,40 @@ public class UtilityMethods {
                     toChange = emp.getInvalidAccs().get(p-1);
                     System.out.print("\nChange the account type: ");
                     char type = sc.nextLine().charAt(0);
-
-                    if (type == 'a' || type == 'b' || type == 'c') {
-                        toChange.setAccType(type);
-                        toChange.setValidAcc(true);
-                        emp.getAccounts().add(toChange);
-                        emp.getInvalidAccs().remove(toChange);
+                    
+                    if(confirmation()==true){
+                        if (type == 'a' || type == 'b' || type == 'c') {
+                            toChange.setAccType(type);
+                            toChange.setValidAcc(true);
+                            emp.getAccounts().add(toChange);
+                            emp.getInvalidAccs().remove(toChange);
+                        }else{
+                            System.out.println("Invalid type of account.");
+                        }
+    
                     }else{
-                        System.out.println("Invalid type of account.");
+                        System.out.println("Cancelled\n");
                     }
+
                 }
             }
         } else{
             System.out.println("\nYou haven't registred an account");
         }
     }
+    public static boolean confirmation(){
+        System.out.print("\nAre you sure? ");
+        ui = sc.nextLine();
+        System.out.println("");
+        boolean f=false;    
+
+        if (ui.equalsIgnoreCase("y")||ui.equalsIgnoreCase("yes")) {
+            f = true;
+        }else{
+            f = false;
+        }
+        return f;
+    }
+
 
 }
