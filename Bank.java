@@ -1,31 +1,40 @@
 import java.util.*;
 
-public class UtilityMethods {
-    static Scanner sc = new Scanner(System.in);
-    static String ui;
-    static boolean flag = false;
+public class Bank {
+    private static Scanner sc = new Scanner(System.in);
+    private static String ui;
+    private static boolean flag = false;
+
+    private static ArrayList <BankAccount> bankAccounts = new ArrayList<BankAccount>();
+    private static ArrayList<Employee> empList = new ArrayList<>();
+
+
+
 
     public static BankAccount createAccount() {
         char type='~';
         BankAccount empAcc = new BankAccount();
 
-        System.out.println("What type of account do you want?");
-        System.out.println("A type: MAX $50 000\nB type: MAX $100 000\nC type: unlimited\n");
-        
         do {
-            try {
-                ui = sc.nextLine();
-                ui = ui.toLowerCase();
-                type = ui.charAt(0);
-                flag=true;            
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input\n");
-                System.out.println("What type of account do you want?");
-                System.out.println("A type: MAX $50 000\nB type: MAX $100 000\nC type: unlimited\n");
-                
-            }
-        } while (flag==false);
+            System.out.println("What type of account do you want?");
+            System.out.println("A type: MAX $50 000\nB type: MAX $100 000\nC type: unlimited\n");    
+            do {
+                try {
+                    ui = sc.nextLine();
+                    ui = ui.toLowerCase();
+                    type = ui.charAt(0);
+                    flag=true;            
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input\n");
+                }
+            
+            } while (flag==false);
+            flag = false;
+
+        }while(confirmation()==false);
+
         empAcc.setAccType(type);
+        bankAccounts.add(empAcc);
         return empAcc;
     }
 
@@ -41,8 +50,24 @@ public class UtilityMethods {
         cl.setLastName(ui);
         System.out.println();
 
-        EmpsRepo.empList.add(cl); 
+        empList.add(cl); 
         return cl;
+    }
+
+    public static void showEmployees() {
+        int i = 1;
+
+        System.out.printf("\n| %-3s | %-15s |%n", "No.", "Name");
+        for (Employee us : empList) {
+            System.out.printf("| %-3s | %-15s |", i, us.getName() + " " + us.getLastName());
+            System.out.println(""); 
+            i++;
+        }
+
+    }
+
+    public static ArrayList<Employee> getEmployees(){
+        return empList;
     }
 
     public static void showInvalidAccs(Employee emp) {
@@ -50,14 +75,34 @@ public class UtilityMethods {
 
         System.out.printf("\n| %-3s | %-4s | %-5s | %-7s |%n", "#","ID", "Type", "Status");
         for (BankAccount toShow : emp.getInvalidAccs()) {
-            if (toShow.isValidAcc()=="Inactive") {
+            if (toShow.isValidAcc()=="Off") {
                 System.out.printf("| %-3s | %-4s | %-5s | %-7s |%n",i, toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc());
                 i++;
             }
         }
     }
 
+    public static void showAccounts(){
+        int i = 1;
+        if (bankAccounts.isEmpty()) {
+            System.out.println("The list is empty.");
+        
+        }else{
+            System.out.printf("\n| %-3s | %-4s | %-5s | %-7s | %-10s | %-12s %n", "#","ID", "Type", "Status","Funds", "Employee");
+            for(Employee emp : empList){
+                for(BankAccount toShow : emp.getAccounts()){
+                    System.out.printf("| %-3s | %-4s | %-5s | %-7s | %-10s | %-12s %-15s %n",i, toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(),toShow.getFunds(),emp.getName(),emp.getLastName());
+                    i++;
+                }
+                for(BankAccount toShow : emp.getInvalidAccs()){
+                    System.out.printf("| %-3s | %-4s | %-5s | %-7s | %-10s | %-12s %-15s %n",i, toShow.getAccNumber(), toShow.getAccType(), toShow.isValidAcc(),toShow.getFunds(),emp.getName(),emp.getLastName());
+                    i++;
+                }
+            }
+        }
+    }
 
+    
     public static void changeAccType(Employee emp) {
         BankAccount toChange;
         int p=0;
@@ -67,7 +112,7 @@ public class UtilityMethods {
             if (emp.getInvalidAccs().isEmpty()) {
                 System.out.println("\nTheres no accounts to change.");
             }else {
-                UtilityMethods.showInvalidAccs(emp);
+                Bank.showInvalidAccs(emp);
                 System.out.print("\nWhat account do you want to change? ");
                 
                 do{
@@ -77,7 +122,7 @@ public class UtilityMethods {
                         sc.nextLine();                        
                     }catch (InputMismatchException e) {
                         System.out.println("Invalid input. \n");
-                        UtilityMethods.showInvalidAccs(emp);
+                        Bank.showInvalidAccs(emp);
                         System.out.print("\nWhat account do you want to change? ");
                         sc.nextLine();
                     }
@@ -89,29 +134,35 @@ public class UtilityMethods {
                     System.out.println("Out of bounds");
                 }else{
                     toChange = emp.getInvalidAccs().get(p-1);
-                    System.out.print("\nChange the account type: ");
-                    char type = sc.nextLine().charAt(0);
+                    char type;
                     
-                    if(confirmation()==true){
-                        if (type == 'a' || type == 'b' || type == 'c') {
-                            toChange.setAccType(type);
-                            toChange.setValidAcc(true);
-                            emp.getAccounts().add(toChange);
-                            emp.getInvalidAccs().remove(toChange);
-                        }else{
-                            System.out.println("Invalid type of account.");
-                        }
-    
-                    }else{
-                        System.out.println("Cancelled\n");
-                    }
-
+                    do {
+                        System.out.println("\nWhat type of account do you want?");
+                        System.out.println("A type: MAX $50 000\nB type: MAX $100 000\nC type: unlimited\n");    
+                        do {
+                            try {
+                                ui = sc.nextLine();
+                                ui = ui.toLowerCase();
+                                type = ui.charAt(0);
+                                flag=true;            
+                            } catch (InputMismatchException e) {
+                                System.out.println("Invalid input\n");
+                            }
+                        
+                        } while (flag==false);
+                        flag = false;
+            
+                    }while(confirmation()==false);
+            
+                    emp.getAccounts().add(toChange);
+                    emp.getInvalidAccs().remove(toChange);
                 }
             }
         } else{
             System.out.println("\nYou haven't registred an account");
         }
     }
+
     public static boolean confirmation(){
         System.out.print("\nAre you sure? ");
         ui = sc.nextLine();
@@ -126,5 +177,5 @@ public class UtilityMethods {
         return f;
     }
 
-
+    
 }

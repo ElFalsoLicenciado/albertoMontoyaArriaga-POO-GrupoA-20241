@@ -16,9 +16,9 @@ public class BankAccount {
     public String isValidAcc() {
         String status;
         if(validAcc==true){
-            status="Active";
+            status="On";
         }else{
-            status="Inactive";
+            status="Off";
         }
         return status;
     }

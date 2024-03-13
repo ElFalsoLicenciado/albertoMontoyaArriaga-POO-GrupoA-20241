@@ -11,8 +11,8 @@ public class Main {
         boolean flag = false;
 
         while (opt != 0) {
-            System.out.println("1. Register an employee.");
-            System.out.println("2. Select employee.");
+            System.out.println("1. Employees and bank accounts.");
+            System.out.println("2. Operations.");
             System.out.println("0. Go back.");
             
                 do
@@ -22,8 +22,8 @@ public class Main {
                         flag = true;
                     }catch (InputMismatchException e){
                         System.out.println("Invalid input.");
-                        System.out.println("\n1. Register an employee.");
-                        System.out.println("2. Select employee.");
+                        System.out.println("\n1. Employees and bank accounts.");
+                        System.out.println("2. Operations.");
                         System.out.println("0. Go back.");
                         sc.nextLine();
                     }
@@ -35,7 +35,7 @@ public class Main {
                 switch (opt) {
                     case  1 : 
                         System.out.println("\n1. Register an employee.\n2. Register an employee + bank account.\n3. Register an employee + bank account & funds.");
-                        System.out.println("4. Employee list.\n0. Quit.");
+                        System.out.println("4. Employee list.\n5. Bank accounts list \n0. Quit.");
                         
                     do
                     {
@@ -45,7 +45,7 @@ public class Main {
                         }catch (InputMismatchException e){
                             System.out.println("Invalid input.");
                             System.out.println("\n1. Register an employee.\n2. Register an employee + bank account.\n3. Register an employee + bank account & funds.");
-                            System.out.println("4. Employee list.\n0. Quit.");
+                            System.out.println("4. Employee list.\n5. Bank accounts list \n0. Quit.");
                             sc.nextLine();
                         }
                     }while(flag==false);
@@ -57,29 +57,26 @@ public class Main {
                                     employeeTrial = Bank.createEmployee();
                                 break;
                                 case 2 :
-                                    employeeTrial = UtilityMethods.createEmployee();
-                                    trialAccount = UtilityMethods.createAccount();
-
-                                    if(UtilityMethods.confirmation()==true){
-                                        if(trialAccount.isValidAcc()=="Active"){
+                                    employeeTrial = Bank.createEmployee();
+                                    trialAccount = Bank.createAccount();
+                                    
+                                        if(trialAccount.isValidAcc()=="On"){
                                             employeeTrial.getAccounts().add(trialAccount);
                                         }else{
                                             employeeTrial.getInvalidAccs().add(trialAccount);
                                         }
                                         
                                         employeeTrial.setValidity(true);    
-                                    } else{
-                                        System.out.println("\nCancelled.");
-                                    }
+                                    
 
                                     
                                 break;
                                 case 3 : 
-                                    employeeTrial = UtilityMethods.createEmployee();
-                                    trialAccount = UtilityMethods.createAccount();
+                                    employeeTrial = Bank.createEmployee();
+                                    trialAccount = Bank.createAccount();
                                     
-                                    if(UtilityMethods.confirmation()==true){   
-                                        if (trialAccount.isValidAcc()=="Active") {
+                                       
+                                        if (trialAccount.isValidAcc()=="On") {
                                             employeeTrial.getAccounts().add(trialAccount);
                                             System.out.print("Funds: $");
                                             employeeTrial.getFunds(0);
@@ -99,28 +96,24 @@ public class Main {
                                             }while(flag==false);
 
                                             flag = false;
-                                            if(UtilityMethods.confirmation()==true){
+                                            
                                                 employeeTrial.getAccounts().get(0).addFunds(q); 
                                                 System.out.print("Current funds: $");
                                                 employeeTrial.getFunds(0); 
-                                            }else{
-                                                System.out.println("\nCancelled.");
-                                            }
+                                            
                                             
                                         } else {
                                             System.out.println("Cannot deposit to such account, invalid account.");
                                             employeeTrial.getInvalidAccs().add(trialAccount);
                                         }
                                         employeeTrial.setValidity(true);
-                                    } else{
-                                        System.out.println("\nCancelled.");
-                                    }
+                                    
                                     break;
 
                                 case 4 : 
                                     int i = 1;
                                     System.out.println("");
-                                    for (Employee toShow : EmpsRepo.empList) {
+                                    for (Employee toShow : Bank.getEmployees()) {
                                         System.out.println(i + ". " + toShow.getName() + " " + toShow.getLastName());
                                         i ++;
                                     }
@@ -130,21 +123,25 @@ public class Main {
                                     System.out.println("\nReturning");
                                     opt = -1;
                                 break;
+
+                                case 5 :
+                                    Bank.showAccounts();
+                                break;
                             }
                         break; 
                         case 2 : 
-                            if (EmpsRepo.empList.isEmpty()) {
+                            if (Bank.getEmployees().isEmpty()) {
                                 System.out.println("Theres no employees registred, please register one.");
                             } else {
-                                int p2=0;
+                                p=0;
                                 Employee emp;
-                                EmpsRepo.showEmployees();
+                                Bank.showEmployees();
                                 System.out.print("\nSelect an employee ");
                             
                                     do
                                         {
                                         try{
-                                            p2 = sc.nextInt();   
+                                            p = sc.nextInt();   
                                             flag = true;
                                         }catch (InputMismatchException e){
                                             System.out.println("Invalid input.");
@@ -155,10 +152,10 @@ public class Main {
                                     
                                     flag = false;
                                     
-                                    if (p2<1 || p2>EmpsRepo.empList.size()) {
+                                    if (p<1 || p>Bank.getEmployees().size()) {
                                         System.out.println("Out of bonds.");
                                     }else{
-                                    emp = EmpsRepo.empList.get(p2 - 1);
+                                    emp = Bank.getEmployees().get(p - 1);
                                     
                                     byClient(emp);
                                     }
@@ -229,7 +226,7 @@ public class Main {
                         }else{
                         theAccount = emp.getAccounts().get(p - 1);
 
-                            if (theAccount.isValidAcc()=="Active") {
+                            if (theAccount.isValidAcc()=="On") {
                                 System.out.print("\nWrite the amount you want to add ");
                                 do
                                 {
@@ -246,8 +243,8 @@ public class Main {
 
                             flag = false;
 
-                                if(UtilityMethods.confirmation()==true){       
-                                theAccount.addFunds(q);
+                                if(Bank.confirmation()==true){
+                                    theAccount.addFunds(q);        
                                 }else{
                                     System.out.println("\nCancelled.");
                                 }
@@ -285,7 +282,7 @@ public class Main {
                         }else{
                         theAccount = emp.getAccounts().get(p - 1);
                         
-                        if (theAccount.isValidAcc()=="Active") {
+                        if (theAccount.isValidAcc()=="On") {
                         System.out.print("\nWrite the amount you want to take ");
                             do
                             {
@@ -302,8 +299,8 @@ public class Main {
                         
                         flag = false;
 
-                        if(UtilityMethods.confirmation()==true){       
-                            theAccount.takeFunds(q);
+                            if(Bank.confirmation()==true){
+                                theAccount.takeFunds(q);
                             }else{
                                 System.out.println("\nCancelled.");
                             }
@@ -333,24 +330,21 @@ public class Main {
                     
                         switch (p) {
                             case 1 : 
-                                BankAccount newAcc = UtilityMethods.createAccount();
+                                BankAccount newAcc = Bank.createAccount();
                                 
-                                if(UtilityMethods.confirmation()==true){    
+                                    
                                 
-                                    if(newAcc.isValidAcc()=="Active"){
+                                    if(newAcc.isValidAcc()=="On"){
                                         emp.getAccounts().add(newAcc);
                                     }else{
                                         emp.getInvalidAccs().add(newAcc);
                                     }
                                     emp.setValidity(true);
                                 
-                                }else{
-                                    System.out.println("Cancelled");
-                                }
                             break;
 
                             case 2 : 
-                                UtilityMethods.changeAccType(emp); 
+                                Bank.changeAccType(emp); 
                             break;
 
                             case 3 :
@@ -374,20 +368,5 @@ public class Main {
                     break;
                 }
             } while (opt != 0);
-    }
-}
-
-class EmpsRepo {
-    public static ArrayList<Employee> empList = new ArrayList<>();
-
-    public static void showEmployees() {
-        int i = 1;
-
-        System.out.printf("\n| %-3s | %-15s |%n", "No.", "Name");
-        for (Employee us : empList) {
-            System.out.printf("| %-3s | %-15s |", i, us.getName() + " " + us.getLastName());
-            System.out.println(""); 
-            i++;
-        }
     }
 }
