@@ -14,14 +14,13 @@ public class Library {
 
     public void addUser(){
 
-        System.out.print("\nWrite the name: ");
+        System.out.print("\nWrite the user's name: ");
         String uiString = sc.nextLine();
-        sc.nextLine();
         int uiInt=0;
 
         do {
             try{
-                System.out.print("\nWrite the age: ");
+                System.out.print("Write the user's age: ");
                 uiInt = sc.nextInt();
                 flag = true;
 
@@ -29,32 +28,32 @@ public class Library {
                 System.out.println("\nInvalid Input.");
                 sc.nextLine();
             }
-        }while(flag==false);
+        }while(!flag);
         flag = false;
 
 
         User user = new User(uiString, uiInt);
         this.userList.add(user);
         showUsers();
+        sc.nextLine();
     }
 
     public void addUserAndBook(){
 
-        System.out.print("\nWrite the name: ");
+        System.out.print("\nWrite the user's name: ");
         String uiString = sc.nextLine();
         int uiInt=0;
 
         do {
             try{
-                System.out.print("\nWrite the age: ");
+                System.out.print("Write the user's age: ");
                 uiInt = sc.nextInt();
                 flag = true;
-
             }catch (InputMismatchException e){
                 System.out.println("\nInvalid Input.");
                 sc.nextLine();
             }
-        }while(flag==false);
+        }while(!flag);
         flag = false;
 
         User user = new User(uiString, uiInt);
@@ -66,43 +65,83 @@ public class Library {
     public void addBook (){
         System.out.print("\nWrite the book's title: ");
         String name = sc.nextLine();
-        sc.nextLine();
-        System.out.print("\nWrite the book's author: ");
+        System.out.print("Write the book's author: ");
         String author = sc.nextLine();
 
         Book book = new Book(name,author);
+        this.availableBooks.add(book);
         this.bookList.add(book);
     }
 
 
-    public  void rentBook(User user){
+    public void rentBook(User user){
         int i=0;
         Book book;
-        showBooks();
-        do
-        {
-            try{
-                i = sc.nextInt();
-                flag = true;
-            }catch (InputMismatchException e){
-                System.out.println("Invalid input.");
-                showBooks();
-                System.out.print("\nSelect an book: ");
-                sc.nextLine();
-            }
-        }while(flag==false);
-        flag = false;
+        if(!(availableBooks.isEmpty())){
+            do{
+                do{
+                    try{
+                        showBooks();
+                        System.out.print("Select a book: ");
+                        i = sc.nextInt();
+                        flag = true;
+                    }catch (InputMismatchException e){
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                }while(!flag);
+                flag = false;
 
-        if (i<1 || i>availableBooks.size()){
-            System.out.println("Out of bonds");
+                if ( i < 1 ||  i > availableBooks.size()){
+                    System.out.println("Out of bonds");
+                }else{
+                    book = availableBooks.get(i-1);
+                    user.borrowBook(book);
+                    unavailableBooks.add(book);
+                    availableBooks.remove(i-1);
+                    showBooks();
+                    flag = true; }
+
+            }while (!flag);
+            flag = false;
         }else{
-            book = availableBooks.get(i-1);
-            user.borrowBook(book);
-            unavailableBooks.add(book);
-            availableBooks.remove(i-1);
+            System.out.println("There's no books available");
         }
     }
 
+    public void preOrder (){
+        int i = 0;
+        User user = null;
+
+        if (!(userList.isEmpty())){
+            do {
+                do {
+                    try {
+                        System.out.print("\nAvailable users: ");
+                        showUsers();
+                        System.out.print("Select an user: ");
+                        i = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();}
+
+                } while (!flag);
+                flag = false;
+
+                if (i < 1 || i > availableBooks.size()) {
+                    System.out.println("Out of bonds");
+                }else{
+                    user = userList.get(i - 1);
+                    flag = true; }
+
+            }while (!flag);
+            flag = false;
+            rentBook(user);
+        }else{
+            System.out.println("There's no user's registered.");
+        }
+    }
     public void showUsersWithBooks () {
         System.out.println("Users who at least have a book borrowed");
         for (User user : userList){
@@ -113,46 +152,42 @@ public class Library {
     }
 
     public void showUsers(){
-        System.out.printf("\n| %3s  | %4s %3s| %3s %n","ID","Name","","Age");
+        System.out.println("\nUser list.");
         for(User us : userList){
-            System.out.printf("| %-3s | %-4s | %-5s %n",us.getId(),us.getName(),us.getAge());
+            System.out.printf("ID: %s, name: %s & age: %s %n",us.getId(),us.getName(),us.getAge());
         }
     }
 
     public void showBooks(){
-        System.out.printf("\n| %3s  | %4s %3s| %3s | %3s %n","ID","Title","","Author","Status");
-
-        for(Book us : availableBooks){
-            System.out.printf("| %-3s | %-4s | %-5s | %-5s %n",us.getId(),us.getTitle(),us.getAuthor(),"Available");
-        }
-
-        for(Book us : unavailableBooks){
-            System.out.printf("| %-3s | %-4s | %-5s | %-5s %n",us.getId(),us.getTitle(),us.getAuthor(),"Unvailable");
+        if (!(bookList.isEmpty())) {
+            showAvailableBooks();
+            showUnavailableBooks();
+        }else{
+            System.out.println("There's no books registered");
         }
     }
 
     public void showUnavailableBooks(){
-        System.out.println("Borrowed books: ");
-        System.out.printf("\n| %3s  | %4s %3s| %3s | %3s %n","ID","Title","","Author","Status");
-
-        for(Book us : unavailableBooks){
-            System.out.printf("| %-3s | %-4s | %-5s %n",us.getId(),us.getTitle(),us.getAuthor());
+        if (!(unavailableBooks.isEmpty())) {
+            System.out.println("\nBorrowed books: ");
+            for (Book us : unavailableBooks) {
+                System.out.printf("ID: %s, title: %s, author: %s & status: Unavailable %n", us.getId(), us.getTitle(), us.getAuthor());
+            }
+        }else{
+            System.out.println("There's no borrowed books.");
         }
     }
+
 
     public void showAvailableBooks(){
-        System.out.println("Available books: ");
-        System.out.printf("\n| %3s  | %4s %3s| %3s | %3s %n","ID","Title","","Author","Status");
-        for(Book us : availableBooks){
-            System.out.printf("| %-3s | %-4s | %-5s %n",us.getId(),us.getTitle(),us.getAuthor());
-        }
+        if (!(availableBooks.isEmpty())) {
+            System.out.println("\nAvailable books: ");
+            for (Book us : availableBooks) {
+                System.out.printf("ID: %s, title: %s, author: %s & status: Available %n", us.getId(), us.getTitle(), us.getAuthor());
+            }
+        }else{
+                System.out.println("There's no available books.");
+            }
     }
 
-    public ArrayList<User> getUserList() {
-        return userList;
-    }
-
-    public ArrayList<Book> getBookList() {
-        return bookList;
-    }
 }
